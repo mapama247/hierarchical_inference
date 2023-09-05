@@ -1,0 +1,23 @@
+fos:
+    0: intelcomp/fos_level0
+ipc:
+    0: intelcomp/ipc_level0
+    1:
+        A: intelcomp/ipc_level1_A
+        B: intelcomp/ipc_level1_B
+        C: intelcomp/ipc_level1_C
+        D: intelcomp/ipc_level1_D
+        E: intelcomp/ipc_level1_E
+        F: intelcomp/ipc_level1_F
+        G: intelcomp/ipc_level1_G
+        H: intelcomp/ipc_level1_H
+nace2:
+    0: intelcomp/nace2_level0
+    1:
+        20: intelcomp/nace2_level1_20
+        25: intelcomp/nace2_level1_25
+        26: intelcomp/nace2_level1_26
+        27: intelcomp/nace2_level1_27
+        28: intelcomp/nace2_level1_28
+        29: intelcomp/nace2_level1_29
+        42: intelcomp/nace2_level1_42
