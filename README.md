@@ -3,9 +3,11 @@
 Python package that allows using a cascade of text classifiers based on a given hierarchy of language models.
 
 ## Setup
-```commandline
-pip install hierarchical-inference
-```
+- Intall: `pip install .`
+- Update: `pip install --upgrade .`
+- Uninstall: `pip uninstall hierarchical_inference`
+- Create source distribution and wheel: `python setup.py sdist bdist_wheel`
+- Check build after compilation: `twine check dist/*`
 
 ## Usage
 Toy example commands:
