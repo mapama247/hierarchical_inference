@@ -1,4 +1,4 @@
-# Inference system for hierarchical text classification
+# Hierarchical Text Classification System
 
 Python package that allows using a cascade of text classifiers based on a given hierarchy of language models.
 
