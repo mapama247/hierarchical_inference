@@ -57,6 +57,26 @@ After instantiating an object from the Classification class, you can access the 
 - `avail_taxonomies`: List of taxonomies available in `data/models.yaml`. Notice that this is a private attribute that 
 cannot be directly edited by the user, although it can be updated after modifying the YAML files.
 
+## Caching
+
+By default, models are downloaded on-the-fly at inference time. This means that whenever a model is used for the first
+time, it will have to be downloaded first. In subsequent calls, inference will be faster since the model will already be
+loaded in memory. For a smooth and uninterrupted inference, it is possible to load all models at once (or only the ones
+belonging to a specific taxonomy) with the function `cache_models()`. By doing this, the desired models will be cached
+in the directory specified by the class attribute `CACHE_DIR`, which can be modified if needed.
+
+For instance, to classify models according to the IPC taxonomy, all IPC models can be loaded beforehand as follows:
+```python
+from clf_inference_intelcomp import Classification
+
+clf = Classification()
+clf.CACHE_DIR = "~/Downloads/intelcomp/models"
+clf.cache_models("ipc")
+res = clf.classify("ipc", "This will not wait for model downloads.")
+```
+
+Similarly, in order to load ALL available models, no matter the taxonomy, simply call `clf.cache_models()` with no arguments.
+
 ## Adding/Removing new taxonomies
 
 To add and/or remove new taxonomies, the YAML files within the `data` directory must be updated accordingly.
