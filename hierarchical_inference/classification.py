@@ -1,4 +1,4 @@
-from hierarchical_inference import utils
+from clf_inference_intelcomp import utils
 import transformers
 import torch
 import os
@@ -20,6 +20,7 @@ class Classification:
         self._avail_taxonomies = list(self.models.keys())
 
         print(f"Classifier ready to perform inference in the following taxonomies: {self._avail_taxonomies}")
+        print(f"You can add/remove taxonomies by editing the YAML files from: {self.WORKING_DIR}/data")
         print(f"Device: {'GPU' if self.DEVICE=='cuda' else 'CPU'}")
 
         for taxonomy in self.models.keys():
@@ -37,6 +38,25 @@ class Classification:
 
     def update_taxonomies(self):
         self.__init__()
+
+    def cache_models(self, taxonomy: str = None):
+        """
+        Caches languages models in memory to avoid having to download them at inference time.
+
+        Parameters
+        ----------
+        taxonomy : str
+            Can be either the name of one of the available taxonomies (so that only its models are loaded in memory)
+            or the keyword 'all' (default value) that allows caching all models at once.
+        """
+        try:
+            models_to_load = utils.flatten_dict(self.models) if not taxonomy else utils.flatten_dict(self.models[taxonomy])
+        except KeyError:
+            raise KeyError(f"The taxonomy '{taxonomy}' is not available. Options: {self._avail_taxonomies}")
+        for model_name, model_path in models_to_load.items():
+            transformers.AutoModelForSequenceClassification.from_pretrained(model_path, cache_dir=self.CACHE_DIR)
+            if taxonomy: model_name = f"{taxonomy}_{model_name}"
+            print(f"Model {model_name} has been cached successfully.")
 
     def classify(self, taxonomy: str, text: str, verbose: bool =True) -> dict:
         """
