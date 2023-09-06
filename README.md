@@ -8,6 +8,7 @@ Python package that allows using a cascade of text classifiers based on a given 
 - Uninstall: `pip uninstall hierarchical_inference`
 - Create source distribution and wheel: `python setup.py sdist bdist_wheel`
 - Check build after compilation: `twine check dist/*`
+- Upload to pypi: `twine upload dist/*`
 
 ## Usage
 Toy example commands:
