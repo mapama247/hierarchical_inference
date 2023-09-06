@@ -17,6 +17,16 @@ def timer(func: callable) -> callable:
         return result
     return wrap_func
 
+def flatten_dict(d: dict, separator='_', prefix='') -> dict:
+    """ Flattens a nested dictionary. """
+    res = {}
+    for k,v in d.items():
+        if isinstance(v, dict):
+            res.update(flatten_dict(v, separator, prefix+k+separator))
+        else:
+            res[prefix+k] = v
+    return res
+
 def fix_dictionary_keys(d: dict) -> dict:
     """ Fix to ensure that all dictionary keys have the same data type. """
     fixed_dict = {}
